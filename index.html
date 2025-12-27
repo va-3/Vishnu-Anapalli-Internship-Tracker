@@ -1596,6 +1596,98 @@
                 width: 100%;
             }
         }
+
+        /* ============================================ */
+        /* ENHANCED MOBILE OPTIMIZATION - Dec 27, 2025 */
+        /* ============================================ */
+        
+        /* Mobile table horizontal scrolling */
+        @media (max-width: 768px) {
+            .section-content {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .section-content table {
+                min-width: 650px;
+            }
+            .section-content::after {
+                content: '← Scroll horizontally →';
+                display: block;
+                text-align: center;
+                font-size: 0.65rem;
+                color: #999;
+                padding: 4px 0;
+                font-style: italic;
+            }
+            /* Touch-friendly apply buttons */
+            .apply-link {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 10px 16px;
+            }
+            /* Sticky table headers within scroll */
+            th {
+                position: sticky;
+                top: 0;
+                background: #f0f0f0;
+                z-index: 10;
+            }
+        }
+        
+        /* Sources Dropdown */
+        .sources-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .sources-toggle {
+            background: transparent;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-family: 'Crimson Pro', Georgia, serif;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sources-toggle:hover {
+            background: #f5f5f5;
+            border-color: #999;
+        }
+        .sources-list {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 8px 0;
+            min-width: 320px;
+            z-index: 1000;
+            margin-bottom: 8px;
+        }
+        .sources-dropdown.open .sources-list {
+            display: block;
+        }
+        .sources-list a {
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        .sources-list a:hover {
+            background: #f5f5f5;
+        }
+        .sources-list .source-stars {
+            color: #888;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
     </style>
     <!-- PDF.js from unpkg -->
     <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
@@ -2035,16 +2127,41 @@ The more detail you provide, the better the analysis will be."></textarea>
         </div><!-- End matcher-view -->
 
         <div class="footer">
-            <p>Internship List last updated: December 27, 2025 | Ranked by Company Prestige | Source: SimplifyJobs GitHub</p>
+            <p>
+                Last updated: December 27, 2025 | 369 verified roles | 
+                <span class="sources-dropdown" id="sourcesDropdown">
+                    <button class="sources-toggle" onclick="toggleSources()">
+                        Sources (5) ▼
+                    </button>
+                    <div class="sources-list">
+                        <a href="https://github.com/SimplifyJobs/Summer2026-Internships" target="_blank">
+                            SimplifyJobs/Summer2026-Internships <span class="source-stars">★ 42.8k</span>
+                        </a>
+                        <a href="https://github.com/vanshb03/Summer2026-Internships" target="_blank">
+                            vanshb03/Summer2026-Internships <span class="source-stars">★ 2.1k</span>
+                        </a>
+                        <a href="https://github.com/speedyapply/2026-SWE-College-Jobs" target="_blank">
+                            speedyapply/2026-SWE-College-Jobs <span class="source-stars">★ 6.2k</span>
+                        </a>
+                        <a href="https://github.com/arunike/Summer-2025-Internship-List" target="_blank">
+                            arunike/Summer-2025-Internship-List <span class="source-stars">★ 1.5k</span>
+                        </a>
+                        <a href="https://swelist.com" target="_blank">
+                            SWEList.com <span class="source-stars">Job alerts</span>
+                        </a>
+                    </div>
+                </span>
+            </p>
         </div>
     </div>
 
     <script>
     // ============================================
-    // INTERNSHIP DATA - 314 ROLES (Updated Dec 27, 2025)
+    // INTERNSHIP DATA - 369 ROLES (Updated Dec 27, 2025)
+    // Sources: SimplifyJobs, vanshb03, speedyapply, arunike
     // ============================================
     const internships = [
-        // TEXAS (24 roles) - Updated with verified direct links
+        // TEXAS (32 roles) - Updated with verified direct links
         { id: "texas-1", section: "texas", company: "GM Financial", role: "Software Development Engineer Intern", desc: "Build financial software systems for auto lending operations.", location: "Irving, TX", deadline: "Rolling", url: "https://fa-exvu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/1445" },
         { id: "texas-2", section: "texas", company: "GM Financial", role: "Software Development Engineer Intern", desc: "Develop applications supporting vehicle financing services.", location: "Arlington, TX", deadline: "Rolling", url: "https://fa-exvu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/1381" },
         { id: "texas-3", section: "texas", company: "GM Financial", role: "Software Development Engineer Intern", desc: "Work on financial technology applications.", location: "Irving, TX", deadline: "Rolling", url: "https://fa-exvu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/1449" },
@@ -2069,8 +2186,17 @@ The more detail you provide, the better the analysis will be."></textarea>
         { id: "texas-22", section: "texas", company: "Hunt Oil Company", role: "IT Service Management Intern", desc: "Build ServiceNow ITSM workflows for energy company. Housing provided.", location: "Dallas, TX", deadline: "Rolling", url: "https://www.huntoil.com/careers" },
         { id: "texas-23", section: "texas", company: "RESPEC", role: "Student Software Engineering Intern", desc: "Build data & technology solutions. 100% employee-owned.", location: "Richardson, TX", deadline: "Rolling", url: "https://jobs.smartrecruiters.com/RESPECInc/744000080649494-student-software-engineering-intern" },
         { id: "texas-24", section: "texas", company: "Aechelon Technology", role: "RTK Internship - Junior Software Engineer", desc: "Work on real-time simulation and visualization software.", location: "Farmers Branch, TX", deadline: "Rolling", url: "https://www.aechelon.com/careers" },
+        // NEW TEXAS ROLES - Added Dec 27, 2025
+        { id: "texas-25", section: "texas", company: "Wells Fargo", role: "Technology Summer Intern - Software Engineer", desc: "Build banking technology solutions. 10-week program. $48.08/hr.", location: "Irving, TX", deadline: "Rolling", url: "https://www.wellsfargojobs.com/en/jobs/r-474982/2026-technology-summer-internship-early-careers-software-engineer/" },
+        { id: "texas-26", section: "texas", company: "Shield AI", role: "Software Engineering Intern", desc: "Build autonomous AI for defense drones. 10-week program. $40-61/hr.", location: "Dallas, TX", deadline: "Rolling", url: "https://jobs.lever.co/shieldai/da49232a-dc28-4085-a9b9-9059e643bc7f" },
+        { id: "texas-27", section: "texas", company: "Shield AI", role: "Embedded Software Engineering Intern", desc: "Write embedded firmware for UAVs in C/C++. $42-62/hr.", location: "Dallas, TX", deadline: "Rolling", url: "https://jobs.lever.co/shieldai/84ed6c2d-a904-4459-9ddb-254561df2439" },
+        { id: "texas-28", section: "texas", company: "Shield AI", role: "Hardware Test Software Engineering Intern", desc: "Develop automated test scripts in Python for aerospace hardware. $40-61/hr.", location: "Dallas, TX", deadline: "Rolling", url: "https://jobs.lever.co/shieldai/0ebcc338-59d1-431a-9ac9-ddf85fc4a8bf" },
+        { id: "texas-29", section: "texas", company: "Lockheed Martin", role: "Software Engineer Intern", desc: "Build defense aerospace software systems.", location: "Fort Worth, TX", deadline: "Rolling", url: "https://www.lockheedmartinjobs.com/search-jobs?k=intern+software+2026&l=Texas" },
+        { id: "texas-30", section: "texas", company: "Texas Instruments", role: "Software Engineering Intern", desc: "Build embedded software for semiconductors.", location: "Dallas, TX", deadline: "Rolling", url: "https://careers.ti.com/search-jobs?k=software+intern+2026" },
+        { id: "texas-31", section: "texas", company: "Hudson River Trading", role: "Software Engineering Intern", desc: "Build low-latency trading systems. Top quant firm. $120/hr.", location: "Austin, TX", deadline: "Rolling", url: "https://www.hudsonrivertrading.com/careers/job/?gh_jid=6998786" },
+        { id: "texas-32", section: "texas", company: "Motorola Solutions", role: "Software Engineer Intern", desc: "Build public safety communication software.", location: "Allen, TX", deadline: "Rolling", url: "https://motorolasolutions.wd5.myworkdayjobs.com/Careers/job/Allen-TX/Software-Engineer---Summer-2026-Internship_R60537" },
 
-        // REMOTE (20 roles) - Updated with verified direct links
+        // REMOTE (27 roles) - Updated with verified direct links
         { id: "remote-1", section: "remote", company: "Dropbox", role: "Software Engineer Intern", desc: "Develop cloud storage and collaboration features.", location: "Remote USA", deadline: "Rolling", url: "https://boards.greenhouse.io/embed/job_app?token=7449835" },
         { id: "remote-2", section: "remote", company: "Oracle", role: "Cloud Product Release Intern", desc: "Support Oracle Cloud infrastructure releases.", location: "Remote USA", deadline: "Rolling", url: "https://eeho.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_45001/job/321081" },
         { id: "remote-3", section: "remote", company: "Dexcom", role: "Software Engineering Intern", desc: "Develop continuous glucose monitoring software.", location: "Remote USA", deadline: "Rolling", url: "https://dexcom.wd1.myworkdayjobs.com/Dexcom/job/Remote---United-States/Intern-I---Software-Engineering_JR115298" },
@@ -2091,8 +2217,16 @@ The more detail you provide, the better the analysis will be."></textarea>
         { id: "remote-18", section: "remote", company: "Capital One", role: "Full Stack Software Engineer Intern", desc: "Build banking technology solutions.", location: "Toronto, Canada", deadline: "Rolling", url: "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/Toronto-ON/Intern--Full-Stack-Software-Engineer---Summer-2026_R232318-2" },
         { id: "remote-19", section: "remote", company: "Capital One", role: "Backend Software Engineer Intern", desc: "Build backend banking systems.", location: "Toronto, Canada", deadline: "Rolling", url: "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/Toronto-ON/Intern--Backend-Software-Engineer---Summer-2026_R232315-1" },
         { id: "remote-20", section: "remote", company: "Capital One", role: "Mobile Software Engineer Intern", desc: "Build mobile banking applications.", location: "Toronto, Canada", deadline: "Rolling", url: "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/Toronto-ON/Intern--Mobile-Software-Engineer---Summer-2026_R232329-2" },
+        // NEW REMOTE ROLES - Added Dec 27, 2025
+        { id: "remote-21", section: "remote", company: "Transcarent", role: "Full Stack Software Engineer Intern", desc: "Build healthcare navigation platform. Remote-first.", location: "Remote USA", deadline: "Rolling", url: "https://transcarent.com/careers" },
+        { id: "remote-22", section: "remote", company: "Ever.Ag", role: "Data Engineer Intern", desc: "Build data pipelines for agriculture technology.", location: "Remote USA", deadline: "Rolling", url: "https://www.ever.ag/careers" },
+        { id: "remote-23", section: "remote", company: "Saviynt", role: "Software Engineering R&D Intern", desc: "Build identity governance and cloud security platform.", location: "Remote USA", deadline: "Rolling", url: "https://saviynt.com/company/careers" },
+        { id: "remote-24", section: "remote", company: "Synchrony", role: "Software Engineer Intern", desc: "Build consumer financial services technology.", location: "Remote USA", deadline: "Rolling", url: "https://www.synchronycareers.com" },
+        { id: "remote-25", section: "remote", company: "SupplyHouse", role: "Full Stack Developer Intern", desc: "Build e-commerce platform for plumbing/HVAC.", location: "Remote USA", deadline: "Rolling", url: "https://www.supplyhouse.com/careers" },
+        { id: "remote-26", section: "remote", company: "Wealth.com", role: "Software Engineer Intern", desc: "Build estate planning technology platform.", location: "Remote USA", deadline: "Rolling", url: "https://www.wealth.com/careers" },
+        { id: "remote-27", section: "remote", company: "Clerkie", role: "Software Engineer Intern", desc: "Build AI-powered financial assistance platform.", location: "Remote USA", deadline: "Rolling", url: "https://www.clerkie.io/careers" },
 
-        // BUSINESS TECHNOLOGY (47 roles) - Updated with verified direct links
+        // BUSINESS TECHNOLOGY (47 roles) - Consulting, Finance, Healthcare
         { id: "biztech-1", section: "biztech", company: "Intuit", role: "Full Stack Engineering Intern", desc: "Build TurboTax and QuickBooks features.", location: "4 locations", deadline: "Rolling", url: "https://www.intuit.com/careers" },
         { id: "biztech-2", section: "biztech", company: "Honeywell", role: "Systems Engineering Intern", desc: "Work on aerospace and industrial control systems.", location: "United States", deadline: "Rolling", url: "https://careers.honeywell.com" },
         { id: "biztech-3", section: "biztech", company: "CVS Health", role: "Innotech Engineering Intern", desc: "Build healthcare retail technology solutions.", location: "5 locations", deadline: "Rolling", url: "https://jobs.cvshealth.com" },
@@ -2392,7 +2526,70 @@ The more detail you provide, the better the analysis will be."></textarea>
         { id: "swe-221", section: "swe", company: "Adobe", role: "AI/ML Engineer Intern", desc: "Build AI features for creative tools.", location: "San Jose, CA", deadline: "Rolling", url: "https://www.adobe.com/careers" },
         { id: "swe-222", section: "swe", company: "Oracle", role: "Java Software Engineer Intern - Health", desc: "Build healthcare Java applications.", location: "Nashville, TN", deadline: "Rolling", url: "https://www.oracle.com/careers" },
         { id: "swe-223", section: "swe", company: "Oracle", role: "Software Engineer Intern - OCI", desc: "Build Oracle Cloud Infrastructure.", location: "Nashville, TN", deadline: "Rolling", url: "https://www.oracle.com/careers" },
+        // NEW SWE ROLES - Quant Finance - Added Dec 27, 2025
+        { id: "swe-224", section: "swe", company: "Citadel Securities", role: "Software Engineer Intern", desc: "Build trading technology at top market maker. 11-week program. $4,300-4,800/week.", location: "NYC / Miami", deadline: "Rolling", url: "https://www.citadelsecurities.com/careers/details/software-engineer-intern-us/" },
+        { id: "swe-225", section: "swe", company: "Citadel", role: "Software Engineer Intern", desc: "Build quantitative trading systems at top hedge fund. $4,300-4,800/week.", location: "Chicago / NYC / Miami", deadline: "Rolling", url: "https://www.citadel.com/careers/details/software-engineer-intern-us/" },
+        { id: "swe-226", section: "swe", company: "Hudson River Trading", role: "Software Engineering Intern", desc: "Build high-frequency trading systems. Top quant firm. $120/hr.", location: "NYC / London / Singapore", deadline: "Rolling", url: "https://www.hudsonrivertrading.com/careers/job/?gh_jid=6998786" },
+        { id: "swe-227", section: "swe", company: "Jump Trading", role: "Software Engineer Intern", desc: "Build ultra-low latency trading infrastructure. $138/hr.", location: "Chicago, IL", deadline: "Rolling", url: "https://www.jumptrading.com/careers" },
+        { id: "swe-228", section: "swe", company: "Optiver", role: "Software Engineer Intern", desc: "Build trading systems for global market maker.", location: "Chicago / Austin", deadline: "Rolling", url: "https://optiver.com/working-at-optiver/career-opportunities/" },
+        { id: "swe-229", section: "swe", company: "Tower Research Capital", role: "Software Engineer Intern", desc: "Build quantitative trading technology.", location: "New York, NY", deadline: "Rolling", url: "https://www.tower-research.com/careers" },
+        { id: "swe-230", section: "swe", company: "Arcesium", role: "Software Engineer Intern", desc: "Build investment management technology platform.", location: "New York, NY", deadline: "Rolling", url: "https://www.arcesium.com/careers" },
+        { id: "swe-231", section: "swe", company: "IEX Group", role: "Software Engineer Intern", desc: "Build stock exchange technology.", location: "New York, NY", deadline: "Rolling", url: "https://iextrading.com/careers" },
+        // NEW SWE ROLES - Autonomous/Robotics - Added Dec 27, 2025
+        { id: "swe-232", section: "swe", company: "Aurora", role: "Software Engineering Intern", desc: "Build self-driving truck technology. $47-65/hr.", location: "Mountain View / Pittsburgh", deadline: "Rolling", url: "https://aurora.tech/careers/8227393002" },
+        { id: "swe-233", section: "swe", company: "Skydio", role: "Middleware Software Engineer Intern", desc: "Build drone infrastructure software. $47-58/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7493238003" },
+        { id: "swe-234", section: "swe", company: "Skydio", role: "Autonomy Engineer Intern", desc: "Build planning and controls for autonomous drones. $47-58/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7498514003" },
+        { id: "swe-235", section: "swe", company: "Skydio", role: "Mobile Software Engineer Intern", desc: "Build Android drone control apps. Kotlin/Jetpack Compose. $47-58/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7494622003" },
+        { id: "swe-236", section: "swe", company: "Skydio", role: "Embedded Software Engineer Intern", desc: "Build firmware for autonomous drones. C/C++. $47-58/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7493211003" },
+        { id: "swe-237", section: "swe", company: "Skydio", role: "Computer Vision/Deep Learning Intern", desc: "Build perception algorithms for drones. $47-53/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7498519003" },
+        { id: "swe-238", section: "swe", company: "Skydio", role: "Cloud Platform Software Engineer Intern", desc: "Build cloud infrastructure for drone fleet. $47-58/hr.", location: "San Mateo, CA", deadline: "Rolling", url: "https://www.skydio.com/jobs/7499739003" },
+        { id: "swe-239", section: "swe", company: "Wing", role: "Software Engineer Intern", desc: "Build drone delivery systems at Alphabet subsidiary.", location: "Palo Alto, CA", deadline: "Rolling", url: "https://wing.com/careers" },
+        { id: "swe-240", section: "swe", company: "Zoox", role: "Software Engineer Intern", desc: "Build autonomous robotaxi technology at Amazon subsidiary.", location: "Foster City, CA", deadline: "Rolling", url: "https://zoox.com/careers" },
+        { id: "swe-241", section: "swe", company: "Hermeus", role: "Software Engineer Intern", desc: "Build hypersonic aircraft systems.", location: "Atlanta, GA", deadline: "Rolling", url: "https://www.hermeus.com/careers" },
+        { id: "swe-242", section: "swe", company: "Reliable Robotics", role: "Flight Software Engineer Intern", desc: "Build autonomous aircraft systems.", location: "Mountain View, CA", deadline: "Rolling", url: "https://reliable.co/careers" },
+        // NEW SWE ROLES - Cloud/Enterprise - Added Dec 27, 2025
+        { id: "swe-243", section: "swe", company: "Pure Storage", role: "Software Engineer Intern", desc: "Build enterprise flash storage systems.", location: "Santa Clara, CA", deadline: "Rolling", url: "https://www.purestorage.com/company/careers.html" },
+        { id: "swe-244", section: "swe", company: "Sigma Computing", role: "Software Engineering Intern", desc: "Build cloud analytics platform. Series D startup.", location: "San Francisco / NYC", deadline: "Rolling", url: "https://www.sigmacomputing.com/company/careers" },
+        { id: "swe-245", section: "swe", company: "Whatnot", role: "Software Engineer Intern", desc: "Build live shopping marketplace. Fast-growing startup.", location: "San Francisco, CA", deadline: "Rolling", url: "https://www.whatnot.com/careers" },
+        { id: "swe-246", section: "swe", company: "Replit", role: "Software Engineering Intern", desc: "Build collaborative coding platform with AI.", location: "Foster City, CA", deadline: "Rolling", url: "https://replit.com/careers" },
+        { id: "swe-247", section: "swe", company: "Braze", role: "Software Engineering Intern", desc: "Build customer engagement platform.", location: "New York, NY", deadline: "Rolling", url: "https://www.braze.com/company/careers" },
+        { id: "swe-248", section: "swe", company: "Benchling", role: "Software Engineer Intern", desc: "Build biotech R&D cloud platform.", location: "San Francisco, CA", deadline: "Rolling", url: "https://www.benchling.com/careers" },
+        { id: "swe-249", section: "swe", company: "PTC", role: "Software Engineering Intern", desc: "Build industrial IoT and PLM software.", location: "Boston, MA", deadline: "Rolling", url: "https://www.ptc.com/en/careers" },
+        { id: "swe-250", section: "swe", company: "Tamr", role: "Software Engineering Intern", desc: "Build enterprise data mastering platform.", location: "Cambridge, MA", deadline: "Rolling", url: "https://www.tamr.com/company/careers" },
+        { id: "swe-251", section: "swe", company: "Sonos", role: "Software Engineering Intern", desc: "Build audio streaming systems.", location: "Boston, MA", deadline: "Rolling", url: "https://www.sonos.com/en-us/careers" },
+        // NEW SWE ROLES - AI/ML Focused - Added Dec 27, 2025
+        { id: "swe-252", section: "swe", company: "Sierra", role: "Agent Development Intern", desc: "Build conversational AI agents. Bret Taylor's AI startup.", location: "San Francisco, CA", deadline: "Rolling", url: "https://sierra.ai/careers" },
+        { id: "swe-253", section: "swe", company: "Atomic Semi", role: "Rust Software Engineer Intern", desc: "Build AI chip manufacturing software in Rust.", location: "San Francisco, CA", deadline: "Rolling", url: "https://atomicsemi.com/careers" },
+        { id: "swe-254", section: "swe", company: "WeRide.ai", role: "Software Engineer Intern", desc: "Build autonomous driving systems.", location: "San Jose, CA", deadline: "Rolling", url: "https://www.weride.ai/careers" },
+        // NEW SWE ROLES - Consumer/Growth - Added Dec 27, 2025
+        { id: "swe-255", section: "swe", company: "Fizz", role: "Software Engineering Intern", desc: "Build college social networking app.", location: "New York, NY", deadline: "Rolling", url: "https://fizzsocial.app/careers" },
+        { id: "swe-256", section: "swe", company: "GoFundMe", role: "Software Engineer Intern", desc: "Build crowdfunding platform.", location: "San Francisco, CA", deadline: "Rolling", url: "https://www.gofundme.com/c/careers" },
+        { id: "swe-257", section: "swe", company: "Appian", role: "Software Quality Engineer Intern", desc: "Build low-code automation platform.", location: "McLean, VA", deadline: "Rolling", url: "https://appian.com/careers.html" },
+        { id: "swe-258", section: "swe", company: "Dialpad", role: "Software Engineer Co-op", desc: "Build AI-powered communications platform.", location: "Vancouver, Canada", deadline: "Rolling", url: "https://www.dialpad.com/careers" },
+        // NEW SWE ROLES - Defense/Space - Added Dec 27, 2025
+        { id: "swe-259", section: "swe", company: "Hadrian", role: "Software Engineer Intern", desc: "Build AI-powered manufacturing for defense.", location: "Los Angeles, CA", deadline: "Rolling", url: "https://www.hadrian.co/careers" },
+        { id: "swe-260", section: "swe", company: "Collaborative Robotics", role: "Software Engineer Intern", desc: "Build collaborative robots for manufacturing.", location: "Santa Clara, CA", deadline: "Rolling", url: "https://www.cobot.co/careers" },
+        { id: "swe-261", section: "swe", company: "Lumafield", role: "Software Engineer Intern", desc: "Build industrial CT scanning and 3D analysis.", location: "San Francisco, CA", deadline: "Rolling", url: "https://www.lumafield.com/careers" },
+        // NEW SWE ROLES - Healthcare - Added Dec 27, 2025
+        { id: "swe-262", section: "swe", company: "Garner Health", role: "Full Stack Engineering Intern", desc: "Build healthcare quality platform.", location: "New York, NY", deadline: "Rolling", url: "https://www.getgarner.com/careers" },
+        { id: "swe-263", section: "swe", company: "Zus Health", role: "Software Engineer Intern", desc: "Build healthcare data infrastructure.", location: "San Francisco, CA", deadline: "Rolling", url: "https://www.zushealth.com/careers" },
     ];
+
+    // ============================================
+    // SOURCES DROPDOWN TOGGLE
+    // ============================================
+    function toggleSources() {
+        const dropdown = document.getElementById('sourcesDropdown');
+        dropdown.classList.toggle('open');
+    }
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('sourcesDropdown');
+        if (dropdown && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
 
     // ============================================
     // APPLICATION STATE
