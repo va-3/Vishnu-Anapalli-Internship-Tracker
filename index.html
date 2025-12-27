@@ -1689,12 +1689,8 @@
             margin-left: 8px;
         }
     </style>
-    <!-- PDF.js from unpkg -->
+    <!-- PDF.js from CDN -->
     <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script>
-        // Disable worker for better compatibility on static hosting
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '';
-    </script>
 </head>
 <body>
     <div class="container">
@@ -1703,11 +1699,11 @@
             <button class="mode-toggle" onclick="switchToMatcher()">Resume Matcher</button>
             <h1>Summer 2026 Internships</h1>
             <div class="stats">
-                <div class="stat"><div class="stat-num" id="totalCount">314</div><div class="stat-label">Total</div></div>
-                <div class="stat"><div class="stat-num" id="texasCount">24</div><div class="stat-label">Texas</div></div>
-                <div class="stat"><div class="stat-num" id="remoteCount">22</div><div class="stat-label">Remote</div></div>
-                <div class="stat"><div class="stat-num" id="bizTechCount">66</div><div class="stat-label">Biz Tech</div></div>
-                <div class="stat"><div class="stat-num" id="sweCount">202</div><div class="stat-label">SWE</div></div>
+                <div class="stat"><div class="stat-num" id="totalCount">369</div><div class="stat-label">Total</div></div>
+                <div class="stat"><div class="stat-num" id="texasCount">32</div><div class="stat-label">Texas</div></div>
+                <div class="stat"><div class="stat-num" id="remoteCount">27</div><div class="stat-label">Remote</div></div>
+                <div class="stat"><div class="stat-num" id="bizTechCount">47</div><div class="stat-label">Biz Tech</div></div>
+                <div class="stat"><div class="stat-num" id="sweCount">263</div><div class="stat-label">SWE</div></div>
             </div>
         </div>
 
@@ -3373,6 +3369,16 @@ PASTE THE FULL JOB DESCRIPTION BELOW (from the job posting):
 
     async function extractTextFromPDF(file) {
         const arrayBuffer = await file.arrayBuffer();
+        
+        // Check if PDF.js is loaded
+        if (typeof pdfjsLib === 'undefined') {
+            throw new Error('PDF.js library not loaded. Please refresh the page and try again.');
+        }
+        
+        // Set worker source if not already set
+        if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '';
+        }
         
         try {
             // Use main thread (no worker) for better compatibility
