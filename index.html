@@ -777,6 +777,87 @@
             display: block;
         }
 
+        /* Analysis Progress Bar */
+        .analysis-progress {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            padding: 40px 20px;
+        }
+        .analysis-progress.active {
+            display: flex;
+        }
+        .progress-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .progress-bar-container {
+            width: 100%;
+            max-width: 400px;
+            height: 12px;
+            background: #e5e5e5;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .progress-percentage {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .progress-status {
+            font-size: 0.95rem;
+            color: #666;
+            text-align: center;
+        }
+        .progress-steps {
+            margin-top: 24px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #999;
+            transition: all 0.3s;
+        }
+        .progress-step.active {
+            color: #667eea;
+            font-weight: 500;
+        }
+        .progress-step.completed {
+            color: #059669;
+        }
+        .progress-step-icon {
+            width: 20px;
+            text-align: center;
+        }
+        .progress-step.active .progress-step-icon {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         /* Job Title Alert */
         .job-title-alert {
             padding: 14px 18px;
@@ -1144,6 +1225,11 @@
         }
 
         /* Responsive */
+        /* ============================================
+           MOBILE RESPONSIVE STYLES
+           ============================================ */
+        
+        /* Tablet */
         @media (max-width: 900px) {
             .main-grid {
                 grid-template-columns: 1fr;
@@ -1154,6 +1240,328 @@
             .mode-toggle {
                 position: static;
                 margin: 0 auto 16px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+                font-size: 14px;
+            }
+            .container {
+                max-width: 100%;
+            }
+
+            /* Header */
+            .header {
+                padding: 16px 12px;
+                margin-bottom: 16px;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+                line-height: 1.3;
+            }
+            .title-arrow {
+                display: none;
+            }
+            .stats {
+                gap: 16px;
+            }
+            .stat-num {
+                font-size: 1.3rem;
+            }
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            .header-stats {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            .header-stat-num {
+                font-size: 1.1rem;
+            }
+            .header-stat-label {
+                font-size: 0.65rem;
+            }
+            .powered-by {
+                font-size: 0.75rem;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .reset-key-btn {
+                margin-left: 0;
+            }
+
+            /* Mode Toggle */
+            .mode-toggle {
+                position: static;
+                margin: 0 auto 12px;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            /* API Key Section */
+            .api-key-section {
+                padding: 14px 12px;
+            }
+            .api-key-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .api-key-input-row {
+                flex-wrap: wrap;
+            }
+            .api-key-input {
+                width: 100%;
+                min-width: 0;
+            }
+            .api-key-save-btn,
+            .api-key-delete-btn {
+                flex: 1;
+                padding: 10px 12px;
+            }
+            .api-key-show-btn {
+                padding: 10px;
+            }
+
+            /* Tables - make horizontally scrollable */
+            .section-content {
+                overflow-x: auto;
+            }
+            table {
+                min-width: 700px;
+            }
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+            .section-header {
+                padding: 12px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .section-title {
+                font-size: 1rem;
+            }
+            .fullscreen-btn {
+                display: none;
+            }
+
+            /* Matcher Cards */
+            .card {
+                margin-bottom: 12px;
+            }
+            .card-header {
+                padding: 12px;
+            }
+            .card-content {
+                padding: 12px;
+            }
+            .resume-row {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .resume-icon {
+                font-size: 1.5rem;
+            }
+            .resume-info {
+                flex: 1;
+                min-width: 150px;
+            }
+            .upload-link {
+                order: 4;
+            }
+            .remove-resume-btn {
+                order: 5;
+            }
+
+            /* Job Description */
+            .job-description-textarea {
+                min-height: 120px;
+                font-size: 0.9rem;
+            }
+
+            /* Analyze Button */
+            .analyze-btn {
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+
+            /* Results Panel */
+            .results-panel {
+                padding: 16px 12px;
+            }
+            .score-circle {
+                width: 100px;
+                height: 100px;
+            }
+            .score-number {
+                font-size: 1.8rem;
+            }
+            .score-label {
+                font-size: 0.7rem;
+            }
+
+            /* Progress Bar Mobile */
+            .analysis-progress {
+                padding: 30px 16px;
+                min-height: 350px;
+            }
+            .progress-icon {
+                font-size: 2.5rem;
+            }
+            .progress-bar-container {
+                max-width: 100%;
+            }
+            .progress-percentage {
+                font-size: 1rem;
+            }
+            .progress-status {
+                font-size: 0.85rem;
+            }
+            .progress-steps {
+                max-width: 100%;
+            }
+            .progress-step {
+                font-size: 0.8rem;
+                padding: 6px 0;
+            }
+
+            /* Score Breakdown */
+            .breakdown-row {
+                grid-template-columns: 80px 1fr 40px 35px;
+                gap: 6px;
+                font-size: 0.8rem;
+            }
+            .breakdown-label {
+                font-size: 0.75rem;
+            }
+            .breakdown-weight {
+                display: none;
+            }
+
+            /* Job Title Alert */
+            .job-title-alert {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px;
+            }
+            .job-title-content {
+                width: 100%;
+            }
+
+            /* Keyword Tabs */
+            .keyword-tabs {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .keyword-tab {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+                flex: 1;
+                text-align: center;
+                min-width: 70px;
+            }
+
+            /* Keywords */
+            .keyword-section {
+                padding: 10px;
+            }
+            .keyword-tag {
+                padding: 4px 8px;
+                font-size: 0.75rem;
+            }
+
+            /* Suggestions */
+            .suggestion-item {
+                padding: 12px;
+            }
+            .suggestion-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .suggestion-example {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+            .copy-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            /* Target Indicator */
+            .target-indicator {
+                font-size: 0.8rem;
+            }
+
+            /* Role Search */
+            .role-search-input {
+                font-size: 16px; /* Prevents iOS zoom */
+            }
+            .role-result {
+                padding: 10px;
+            }
+
+            /* Selected Role */
+            .selected-role-info {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+
+            /* Status Dropdowns */
+            .status-dropdown {
+                padding: 6px 8px;
+                font-size: 0.8rem;
+            }
+
+            /* Error Message */
+            .error-message {
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 380px) {
+            body {
+                padding: 8px;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .stats {
+                gap: 10px;
+            }
+            .stat-num {
+                font-size: 1.1rem;
+            }
+            .header-stats {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .score-circle {
+                width: 80px;
+                height: 80px;
+            }
+            .score-number {
+                font-size: 1.5rem;
+            }
+            .keyword-tab {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+            .api-key-input-row {
+                flex-direction: column;
+            }
+            .api-key-save-btn,
+            .api-key-delete-btn,
+            .api-key-show-btn {
+                width: 100%;
             }
         }
     </style>
@@ -1503,6 +1911,38 @@ The more detail you provide, the better the analysis will be."></textarea>
                         <div class="results-placeholder" id="resultsPlaceholder">
                             <div class="results-placeholder-icon">📊</div>
                             <div>Upload your resume and paste a job description to see how well you match</div>
+                        </div>
+
+                        <!-- Analysis Progress -->
+                        <div class="analysis-progress" id="analysisProgress">
+                            <div class="progress-icon">🔍</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="progressBarFill"></div>
+                            </div>
+                            <div class="progress-percentage" id="progressPercentage">0%</div>
+                            <div class="progress-status" id="progressStatus">Starting analysis...</div>
+                            <div class="progress-steps">
+                                <div class="progress-step" id="step1">
+                                    <span class="progress-step-icon">○</span>
+                                    <span>Parsing resume...</span>
+                                </div>
+                                <div class="progress-step" id="step2">
+                                    <span class="progress-step-icon">○</span>
+                                    <span>Extracting job requirements...</span>
+                                </div>
+                                <div class="progress-step" id="step3">
+                                    <span class="progress-step-icon">○</span>
+                                    <span>Identifying company context...</span>
+                                </div>
+                                <div class="progress-step" id="step4">
+                                    <span class="progress-step-icon">○</span>
+                                    <span>Matching keywords...</span>
+                                </div>
+                                <div class="progress-step" id="step5">
+                                    <span class="progress-step-icon">○</span>
+                                    <span>Generating recommendations...</span>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Results Content -->
@@ -2584,6 +3024,36 @@ The more detail you provide, the better the analysis will be."></textarea>
             <a href="${intern.url}" target="_blank" class="link-btn">Apply</a>
         `;
 
+        // Option C: Auto-fill job description with tracker data
+        const currentJD = matcherElements.jobDescription.value.trim();
+        const autoFillText = `Company: ${intern.company}
+Role: ${intern.role}
+Location: ${intern.location}
+Category: ${getSectionDisplayName(intern.section)}
+Description: ${intern.desc}
+
+---
+PASTE THE FULL JOB DESCRIPTION BELOW (from the job posting):
+---
+
+`;
+        
+        // Only auto-fill if JD is empty or ask user
+        if (!currentJD) {
+            matcherElements.jobDescription.value = autoFillText;
+            matcherElements.jobDescription.focus();
+            // Set cursor at the end
+            matcherElements.jobDescription.setSelectionRange(autoFillText.length, autoFillText.length);
+        } else {
+            // If there's existing content, prepend the context
+            const confirmReplace = confirm('Replace current job description with selected role info?\n\nClick OK to replace, or Cancel to keep your current text.');
+            if (confirmReplace) {
+                matcherElements.jobDescription.value = autoFillText;
+                matcherElements.jobDescription.focus();
+                matcherElements.jobDescription.setSelectionRange(autoFillText.length, autoFillText.length);
+            }
+        }
+
         updateAnalyzeButton();
     }
 
@@ -2707,6 +3177,68 @@ The more detail you provide, the better the analysis will be."></textarea>
         matcherElements.errorMessage.textContent = msg;
     }
 
+    // Progress Bar Functions
+    function showProgress() {
+        matcherElements.resultsPlaceholder.style.display = 'none';
+        matcherElements.resultsContent.classList.remove('active');
+        document.getElementById('analysisProgress').classList.add('active');
+        resetProgressSteps();
+    }
+
+    function hideProgress() {
+        document.getElementById('analysisProgress').classList.remove('active');
+    }
+
+    function resetProgressSteps() {
+        for (let i = 1; i <= 5; i++) {
+            const step = document.getElementById(`step${i}`);
+            step.classList.remove('active', 'completed');
+            step.querySelector('.progress-step-icon').textContent = '○';
+        }
+        document.getElementById('progressBarFill').style.width = '0%';
+        document.getElementById('progressPercentage').textContent = '0%';
+        document.getElementById('progressStatus').textContent = 'Starting analysis...';
+    }
+
+    function updateProgress(stepNum, percentage, status) {
+        // Update bar
+        document.getElementById('progressBarFill').style.width = `${percentage}%`;
+        document.getElementById('progressPercentage').textContent = `${percentage}%`;
+        document.getElementById('progressStatus').textContent = status;
+
+        // Update steps
+        for (let i = 1; i <= 5; i++) {
+            const step = document.getElementById(`step${i}`);
+            if (i < stepNum) {
+                step.classList.remove('active');
+                step.classList.add('completed');
+                step.querySelector('.progress-step-icon').textContent = '✓';
+            } else if (i === stepNum) {
+                step.classList.add('active');
+                step.classList.remove('completed');
+                step.querySelector('.progress-step-icon').textContent = '◐';
+            } else {
+                step.classList.remove('active', 'completed');
+                step.querySelector('.progress-step-icon').textContent = '○';
+            }
+        }
+    }
+
+    async function simulateProgress() {
+        const steps = [
+            { step: 1, pct: 15, status: 'Parsing resume...', delay: 600 },
+            { step: 2, pct: 35, status: 'Extracting job requirements...', delay: 800 },
+            { step: 3, pct: 55, status: 'Identifying company context...', delay: 700 },
+            { step: 4, pct: 75, status: 'Matching keywords...', delay: 900 },
+            { step: 5, pct: 90, status: 'Generating recommendations...', delay: 500 }
+        ];
+
+        for (const s of steps) {
+            updateProgress(s.step, s.pct, s.status);
+            await new Promise(r => setTimeout(r, s.delay));
+        }
+    }
+
     // Analysis
     async function handleAnalyze() {
         const resumeText = matcherState.resume?.text;
@@ -2717,13 +3249,27 @@ The more detail you provide, the better the analysis will be."></textarea>
         matcherElements.analyzeBtn.disabled = true;
         matcherElements.analyzeBtn.textContent = 'Analyzing...';
         showMatcherError('');
+        showProgress();
 
         try {
-            const result = await callOpenAI(resumeText, jobDescription);
+            // Start progress animation alongside API call
+            const progressPromise = simulateProgress();
+            const apiPromise = callOpenAI(resumeText, jobDescription);
+            
+            // Wait for both
+            const [_, result] = await Promise.all([progressPromise, apiPromise]);
+            
+            // Complete progress
+            updateProgress(5, 100, 'Analysis complete!');
+            await new Promise(r => setTimeout(r, 400));
+            
             matcherState.analysisResult = result;
+            hideProgress();
             displayResults(result);
         } catch (error) {
             console.error('Analysis error:', error);
+            hideProgress();
+            matcherElements.resultsPlaceholder.style.display = 'flex';
             showMatcherError('Error: ' + error.message);
         } finally {
             matcherElements.analyzeBtn.disabled = false;
@@ -2738,20 +3284,82 @@ The more detail you provide, the better the analysis will be."></textarea>
             throw new Error('Please enter your OpenAI API key above before analyzing.');
         }
 
-        const systemPrompt = `You are an elite ATS (Applicant Tracking System) optimization expert and career strategist. Your goal is to help candidates achieve 90-100% ATS match scores.
+        // Build company context from tracker data
+        let companyContext = '';
+        const selectedRole = matcherState.selectedRole;
+        if (selectedRole) {
+            companyContext = `
+COMPANY CONTEXT FROM TRACKER:
+- Company: ${selectedRole.company}
+- Role: ${selectedRole.role}
+- Location: ${selectedRole.location}
+- Category: ${getSectionDisplayName(selectedRole.section)}
+- Description: ${selectedRole.desc}
+`;
+        } else {
+            // Try to extract company name from JD
+            const companyMatch = jobDescription.match(/Company:\s*([^\n]+)/i) || 
+                                 jobDescription.match(/at\s+([A-Z][A-Za-z\s&]+(?:Inc|LLC|Corp|Ltd)?)/);
+            if (companyMatch) {
+                const companyName = companyMatch[1].trim();
+                const trackerMatch = internships.find(i => 
+                    i.company.toLowerCase() === companyName.toLowerCase()
+                );
+                if (trackerMatch) {
+                    companyContext = `
+COMPANY CONTEXT FROM TRACKER:
+- Company: ${trackerMatch.company}
+- Role: ${trackerMatch.role}
+- Location: ${trackerMatch.location}
+- Category: ${getSectionDisplayName(trackerMatch.section)}
+- Description: ${trackerMatch.desc}
+`;
+                }
+            }
+        }
 
-ANALYSIS METHODOLOGY:
-1. Extract ALL keywords from the job description (skills, tools, certifications, methodologies, soft skills)
-2. Perform exact and semantic matching against the resume
-3. Identify gaps that prevent achieving a 90%+ score
-4. Provide specific, actionable recommendations with copy-paste ready text
+        const systemPrompt = `You are an ELITE ATS (Applicant Tracking System) optimization expert, career strategist, and technical recruiter with deep knowledge of what makes candidates successful at top tech companies.
+
+YOUR MISSION: Help candidates achieve 90-100% ATS match scores by extracting EVERY requirement and providing specific, actionable improvements.
+
+CRITICAL RULES - FOLLOW EXACTLY:
+
+1. KEYWORD EXTRACTION - BE EXHAUSTIVE:
+   You MUST extract a MINIMUM number of keywords per category:
+   - Hard Skills: minimum 5 keywords (programming languages, frameworks, methodologies, concepts)
+   - Tools: minimum 3 keywords (software, platforms, technologies, IDEs, version control)
+   - Soft Skills: minimum 3 keywords (communication, teamwork, leadership, problem-solving)
+   - Other: minimum 2 keywords (certifications, degrees, clearances, industry knowledge)
+   
+   If the JD doesn't explicitly list enough, INFER standard requirements for that role type and company.
+   For example: "Software Engineer Intern" typically requires Git, debugging skills, code reviews, etc.
+
+2. COMPANY KNOWLEDGE:
+   Use your training knowledge about the company mentioned. Consider:
+   - Their tech stack (what languages/tools they're known for)
+   - Company culture and values
+   - What makes candidates successful there
+   - Industry-specific requirements
+
+3. ATS OPTIMIZATION FOCUS:
+   - ATS systems match EXACT keywords - "JavaScript" ≠ "JS"
+   - Keyword placement matters: Skills section gets highest weight
+   - Frequency matters: If JD mentions something 3x, it's critical
+   - Job title match is essential for passing initial filters
+
+4. SUGGESTIONS MUST BE COPY-PASTE READY:
+   Every suggestion needs:
+   - Exact text the user can copy into their resume
+   - Specific location (which section, which bullet point)
+   - Realistic impact score
+   - Clear reasoning tied to ATS matching
 
 RETURN ONLY VALID JSON in this exact format:
 {
   "jobTitle": {
     "extracted": "<exact job title from JD>",
     "foundInResume": true/false,
-    "recommendation": "<if missing: exact text to add to resume header or summary>"
+    "recommendation": "<if missing: exact text to add to resume header>"
   },
   "matchScore": {
     "overall": 0-100,
@@ -2765,42 +3373,72 @@ RETURN ONLY VALID JSON in this exact format:
   },
   "keywords": {
     "hardSkills": {
-      "matched": [{ "keyword": "...", "frequencyInJD": 1 }],
-      "missing": [{ "keyword": "...", "frequencyInJD": 1, "priority": "critical" }]
+      "matched": [{ "keyword": "Python", "frequencyInJD": 3 }],
+      "missing": [{ "keyword": "Java", "frequencyInJD": 2, "priority": "critical" }]
     },
-    "tools": { "matched": [], "missing": [] },
-    "softSkills": { "matched": [], "missing": [] },
-    "other": { "matched": [], "missing": [] }
+    "tools": { 
+      "matched": [{ "keyword": "Git", "frequencyInJD": 1 }],
+      "missing": [{ "keyword": "Docker", "frequencyInJD": 1, "priority": "high" }]
+    },
+    "softSkills": { 
+      "matched": [],
+      "missing": [{ "keyword": "collaboration", "frequencyInJD": 2, "priority": "high" }]
+    },
+    "other": { 
+      "matched": [],
+      "missing": [{ "keyword": "CS degree", "frequencyInJD": 1, "priority": "medium" }]
+    }
   },
   "suggestions": [
     {
       "priority": "critical",
-      "impactScore": "+X%",
-      "action": "<specific action: add to skills section, integrate into bullet point, add certification, etc.>",
-      "section": "<Skills/Experience/Summary/Education>",
-      "example": "<EXACT copy-paste ready text for the resume>",
-      "reason": "<why this boosts ATS score - be specific about keyword matching>"
+      "impactScore": "+15%",
+      "action": "Add to Skills section",
+      "section": "Skills",
+      "example": "Languages: Python, Java, JavaScript, SQL | Frameworks: React, Node.js | Tools: Git, Docker, AWS",
+      "reason": "Adds 4 missing critical keywords that appear multiple times in JD"
+    },
+    {
+      "priority": "critical",
+      "impactScore": "+10%",
+      "action": "Add to resume header/summary",
+      "section": "Summary",
+      "example": "Software Engineer Intern with experience in full-stack development and cloud technologies",
+      "reason": "Matches exact job title for ATS screening"
     }
   ],
-  "summary": "<2-3 sentence gap analysis focused on path to 90%+ score>"
+  "summary": "<2-3 sentences: specific gap analysis and clearest path to 90%+ score>"
 }
 
 SCORING WEIGHTS: Hard Skills 40%, Tools 25%, Job Title 15%, Soft Skills 10%, Other 10%
 
-PRIORITY CLASSIFICATION:
-- critical: Required/must-have skills, 3+ mentions, or in job title (blocks 90%+)
-- high: Preferred skills, 2 mentions, or prominent placement
-- medium: Nice-to-have, 1 mention
-- low: Implied or industry-standard
+PRIORITY LEVELS:
+- critical: Required/must-have, 3+ mentions, in job title, or blocks 90%+ score
+- high: Preferred skills, 2 mentions, prominent placement in JD
+- medium: Nice-to-have, 1 mention, implied by role
+- low: Industry-standard, good to have
 
-SUGGESTION REQUIREMENTS:
-- Provide at least 5 suggestions, prioritized by impact
-- Each suggestion must include EXACT text to add (not vague advice)
-- Focus on quick wins that maximize score improvement
-- Include where to place each addition (Skills section, specific bullet point, summary, etc.)
-- Calculate realistic impact scores
+MINIMUM REQUIREMENTS:
+- At least 5 hard skills identified (matched + missing combined)
+- At least 3 tools identified
+- At least 3 soft skills identified
+- At least 2 other requirements identified
+- At least 5 actionable suggestions with copy-paste text
+- If JD is sparse, INFER typical requirements for this role type
 
-BE THOROUGH: Extract every single keyword from the JD. ATS systems are literal - exact matches matter.`;
+BE THOROUGH AND SPECIFIC. Generic advice = useless. Every recommendation must have exact copy-paste text.`;
+
+        const userMessage = `${companyContext}
+
+RESUME:
+${resumeText}
+
+JOB DESCRIPTION:
+${jobDescription}
+
+TASK: Perform an exhaustive ATS analysis. Extract EVERY keyword from the JD (minimum 5 hard skills, 3 tools, 3 soft skills, 2 other). Use your knowledge of the company and industry to infer additional requirements. Provide specific, copy-paste ready suggestions to achieve a 90%+ match score.
+
+Remember: Empty categories are NOT acceptable. If a category seems empty, infer standard requirements for this role type.`;
 
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -2809,13 +3447,13 @@ BE THOROUGH: Extract every single keyword from the JD. ATS systems are literal -
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'gpt-4o-mini',
+                model: 'gpt-4o',
                 messages: [
                     { role: 'system', content: systemPrompt },
-                    { role: 'user', content: `RESUME:\n${resumeText}\n\nJOB DESCRIPTION:\n${jobDescription}\n\nAnalyze this resume against the job description. Identify ALL keywords and provide specific recommendations to achieve a 90%+ ATS match score.` }
+                    { role: 'user', content: userMessage }
                 ],
-                temperature: 0.2,
-                max_tokens: 3000
+                temperature: 0.1,
+                max_tokens: 3500
             })
         });
 
@@ -2841,11 +3479,35 @@ BE THOROUGH: Extract every single keyword from the JD. ATS systems are literal -
         content = content.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
         
         try {
-            return JSON.parse(content);
+            const result = JSON.parse(content);
+            // Validate minimum requirements
+            return validateAndEnhanceResult(result);
         } catch (e) {
             console.error('JSON parse error:', content);
             throw new Error('Failed to parse AI response');
         }
+    }
+
+    // Ensure AI response meets minimum requirements
+    function validateAndEnhanceResult(result) {
+        const categories = ['hardSkills', 'tools', 'softSkills', 'other'];
+        const minimums = { hardSkills: 5, tools: 3, softSkills: 3, other: 2 };
+        
+        categories.forEach(cat => {
+            if (!result.keywords[cat]) {
+                result.keywords[cat] = { matched: [], missing: [] };
+            }
+            const total = (result.keywords[cat].matched?.length || 0) + 
+                         (result.keywords[cat].missing?.length || 0);
+            
+            // Update breakdown totals
+            if (result.matchScore?.breakdown?.[cat]) {
+                result.matchScore.breakdown[cat].total = total;
+                result.matchScore.breakdown[cat].matched = result.keywords[cat].matched?.length || 0;
+            }
+        });
+        
+        return result;
     }
 
     function displayResults(result) {
